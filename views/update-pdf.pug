@@ -1,0 +1,10 @@
+extends layout
+block content
+    form(action='/api/v1/pdfs/' + pdf._id, method='post')
+        h1 Update PDF
+        div Name:
+        input(type='text', name='name', value=pdf.name)
+        div Author:
+        input(type='text', name='author', value=pdf.author)
+        div
+        button(type="submit") Upload

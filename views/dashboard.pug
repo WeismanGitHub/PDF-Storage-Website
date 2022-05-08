@@ -1,0 +1,32 @@
+extends layout
+block content
+    h1 Dashboard
+    div(class='column')
+        h2 PDFs
+        each pdf in pdfs
+            ul
+                li= pdf.name + ' - ' + pdf.author
+                    br
+                    form(method="get" action='/api/v1/pdfs/' + pdf._id)
+                        button(type="submit") View PDF
+                    form(method="post" action='/api/v1/pdfs/delete/' + pdf._id)
+                        button(type="submit") Delete PDF
+                    form(method="get" action='/pdfupdate/' + pdf._id)
+                        button(type="submit") Update PDF
+                    
+    div(class='column')
+        h2 User
+        p Name: #{user.name}
+        p Email: #{user.email}
+        form(method="get" action='/api/v1/users/' + user._id)
+            button(type="submit") Edit Account
+        form(action='/api/v1/pdfs/', method='post', enctype="multipart/form-data")
+            h3 Upload PDF
+            div Name:
+            input(type='text', name='name')
+            div Author:
+            input(type='text', name='author')
+            div File:
+            input(type="file" name="pdf")
+            div
+            button(type="submit") Upload

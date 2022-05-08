@@ -1,0 +1,20 @@
+body {
+    text-align: center;
+    background-color: aliceblue;
+}
+.column {
+    float: left;
+    width: 50%;
+}
+
+.homePage {
+    position: absolute;
+    top: 0;
+    left: 93%;
+}
+
+.dashboard {
+    position: absolute;
+    top: 5;
+    left: 93%;
+}
