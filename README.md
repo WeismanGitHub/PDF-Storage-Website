@@ -1,2 +1,2 @@
 # PDF-Storage-Website
-A website that uses NodeJS/Express for backend, Pug/CSS for frontend, and MongoDB/Mongoose for the database.
+A PDF storage website that uses Express for backend, Pug/CSS for frontend, and MMongoose for the database. 
