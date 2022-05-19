@@ -8,24 +8,24 @@ const router = express.Router();
 const path = require('path');
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'pdfs/');
+    destination: function (req, file, callback) {
+        callback(null, 'pdfs/');
     },
-    fileFilter: (req, file, cb) => {
-        if (file.mimetype == "application/pdf") {
-            cb(null, true);
-        } else {
-            cb(null, false);
-            return cb(new Error('File must be a pdf.'));
-        }
-    },
-    filename: async function (req, file, cb) {
+    filename: async function (req, file, callback) {
         const pdfId = await uploadPDF(req);
-        cb(null, pdfId + path.extname(file.originalname));
+        callback(null, pdfId + path.extname(file.originalname));
     }
 });
 
-const upload = multer({ storage: storage });
+const fileFilter = function (req, file, callback) {
+    if (file.mimetype == "application/pdf") {
+        callback(null, true);
+    } else {
+        return callback(new Error('File must be a pdf.'));
+    }
+}
+
+const upload = multer({storage: storage, fileFilter: fileFilter});
 
 router.route('/').get(getAllPDFs).post(upload.single('pdf'), async (req, res) => {
     const userId = req.user.id;
